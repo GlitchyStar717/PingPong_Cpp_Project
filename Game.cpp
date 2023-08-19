@@ -1,8 +1,7 @@
-#include "Game.h"
-
 #include <chrono>
 #include <string>
 
+#include "Game.h"
 #include "GameHandler.h"
 
 Game::Game() {
@@ -40,9 +39,13 @@ Mix_Chunk* Game::getPaddleHitSound() {
 void Game::GameStart() {
     States state1;
     state1.initializeStart();
+    int restart = 1;
 
+    state1.runStartScreen(getRenderer(), getFont(),WINDOW_WIDTH, WINDOW_HEIGHT);
     // Game logic
+    while(restart == 1)
     {
+        restart = 0;
         // Create the player score text fields
         PlayerScore playerOneScoreText(Vec2(WINDOW_WIDTH / 4, 20), getRenderer(), getFont());
 
@@ -201,7 +204,7 @@ void Game::GameStart() {
 
             if (GAME_FINISHED) {
                 state1.ShowWinnerScreen(getRenderer(), getFont(), winner);
-                state1.ShowRematchOptionScreen(getRenderer(), getFont());
+                state1.renderText(getRenderer(), getFont(), "Press R for Rematch and Esc to quit" , {255, 255, 255}, 0);
                 running = false;
                 nextMatch = 0;
                 while (nextMatch == 0) {  // While event is being collected/ While there is some event. store the event in e.
@@ -210,6 +213,7 @@ void Game::GameStart() {
                             nextMatch = -1;
                         else if (event.key.keysym.sym == SDLK_r) {
                             nextMatch = 1;
+                            break;
                         }
                     }
                 }
@@ -219,8 +223,8 @@ void Game::GameStart() {
                 // Restart the game
                 state1.ResetGame(ball, paddleOne, paddleTwo, playerOneScoreText, playerTwoScoreText);
                 GAME_FINISHED = false;
-                running = true;
                 nextMatch = 0;
+                restart = 1;
             }
         }
     }
