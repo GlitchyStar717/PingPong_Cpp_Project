@@ -1,0 +1,2 @@
+g++ main.cpp Game.cpp GameHandler.cpp PlayerScore.cpp Paddle.cpp CheckWallCollision.cpp CheckPaddleCollision.cpp Ball.cpp -I C:/src/include -L C:/src/lib -o a -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+.\a
