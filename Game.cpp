@@ -40,8 +40,8 @@ void Game::GameStart() {
     States state1;
     state1.initializeStart();
     int restart = 1;
-
-    state1.runStartScreen(getRenderer(), getFont(),WINDOW_WIDTH, WINDOW_HEIGHT);
+    int winningPoints;
+    state1.runStartScreen(getRenderer(), getFont(),WINDOW_WIDTH, WINDOW_HEIGHT, &winningPoints);
     // Game logic
     while(restart == 1)
     {
@@ -67,14 +67,13 @@ void Game::GameStart() {
 
         // int playerOneScore = 0;
         // int playerTwoScore = 0;
-        int winningPoints = 2;
         int nextMatch = 0;  // 0 means no action, -1 means exit, 1 means restart
 
         bool running = true;
         bool buttons[4] = {};
         bool GAME_FINISHED = false;
 
-        float dt = 0.0f;
+        float dt = 0.0f; //For calculating frameTime for smooth and platform/performance independent speed
         int winner = 0;  // 0 means no winner yet
 
         while (running) {

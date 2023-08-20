@@ -14,7 +14,7 @@ class States
 public:
     void initializeStart();
 
-    void runStartScreen(SDL_Renderer *renderer, TTF_Font *font, int w, int h);
+    void runStartScreen(SDL_Renderer *renderer, TTF_Font *font, int w, int h, int* winning_points );
 
     void ShowWinnerScreen(SDL_Renderer *renderer, TTF_Font *font, int winner);
 

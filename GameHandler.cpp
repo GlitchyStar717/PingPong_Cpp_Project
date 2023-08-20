@@ -7,41 +7,100 @@
 #include <chrono>
 #include <string>
 
-void States::initializeStart(){
+void States::initializeStart() {
     // Initialize SDL components
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) ;
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     TTF_Init();
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 }
 
-void States::runStartScreen(SDL_Renderer *renderer, TTF_Font *font, int w, int h)
+void States::runStartScreen(SDL_Renderer* renderer, TTF_Font* font, int w, int h, int* winning_points) {
+    bool quit = false;
+    SDL_Event e;
+    *winning_points = 5; //By default the winning point is 5;
+
     {
-        bool quit = false;
-        SDL_Event e;
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
 
-        while (!quit)
-        {
-            while (SDL_PollEvent(&e))
-            {
-                if (e.type == SDL_QUIT)
-                {
-                    quit = true;
-                }
-                else if (e.type == SDL_KEYDOWN)
-                {
-                    quit = true; // Exit start screen on any key press
-                }
+        renderText(renderer, font, "Ping Pong Game", {0, 255, 0}, -450);
+        renderText(renderer, font, "Choose the Points to Win ? ", {255, 255, 255}, -300);
+        renderText(renderer, font, "1) 3", {255, 255, 255}, -150);
+        renderText(renderer, font, "2) 5", {255, 255, 255}, 0);
+        renderText(renderer, font, "3) 7", {255, 255, 255}, 150);
+        renderText(renderer, font, "4) 10", {255, 255, 255}, 300);
+        renderText(renderer, font, "5) 15", {255, 255, 255}, 450);
+        renderText(renderer, font, "6) 20", {255, 255, 255}, 600);
+
+        SDL_RenderPresent(renderer);
+    }
+
+    while (!quit) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE) {
+                quit = true;    //Exit with default settings
+            } else if (e.key.keysym.sym == SDLK_1) {
+                *winning_points = 3;
+                quit = true;  // Exit start screen on any of these key presses
+            } else if (e.key.keysym.sym == SDLK_2) {
+                *winning_points = 5;
+                quit = true;  // Exit start screen on any of these key presses
+            } else if (e.key.keysym.sym == SDLK_3) {
+                *winning_points = 7;
+                quit = true;  // Exit start screen on any of these key presses
+            } else if (e.key.keysym.sym == SDLK_4) {
+                *winning_points = 10;
+                quit = true;  // Exit start screen on any of these key presses
+            } else if (e.key.keysym.sym == SDLK_5) {
+                *winning_points = 15;
+                quit = true;  // Exit start screen on any of these key presses
+            } else if (e.key.keysym.sym == SDLK_6) {
+                *winning_points = 20;
+                quit = true;  // Exit start screen on any of these key presses
             }
-
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            SDL_RenderClear(renderer);
-
-            renderText(renderer, font, "Ping Pong Game", {0, 255, 0}, 0);
-            renderText(renderer, font, "Press any key to start", {255, 255, 255}, 150);
-
-            SDL_RenderPresent(renderer);
         }
     }
+
+    //  //Implementing the difficulty with ball and paddle speed
+    // quit = false;
+    // {
+    //     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    //     SDL_RenderClear(renderer);
+
+    //     renderText(renderer, font, "Choose the Ball Speed", {255,255,255}, -450);
+    //     renderText(renderer, font, "a) Very Slow", {255, 255, 255}, -150);
+    //     renderText(renderer, font, "b) Slow", {255, 255, 255}, 0);
+    //     renderText(renderer, font, "c) Medium", {255, 255, 255}, 150);
+    //     renderText(renderer, font, "d) Fast", {255, 255, 255}, 300);
+    //     renderText(renderer, font, "e) Very Fast", {255, 255, 255}, 450);
+
+    //     SDL_RenderPresent(renderer);
+    // }
+
+    // while (!quit) {
+    //     while (SDL_PollEvent(&e)) {
+    //         if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE) {
+    //             quit = true;    // Exit with default settings
+    //         } else if (e.key.keysym.sym == SDLK_a) {
+    //             float* modifyBallSpeed = const_cast<float*>(&BALL_SPEED);
+    //             *modifyBallSpeed= 1.0f;
+    //             quit = true;    // Exit after choosing any of the difficulties
+    //         } else if (e.key.keysym.sym == SDLK_b) {
+    //             *winning_points = 5;
+    //             quit = true;    // Exit after choosing any of the difficulties
+    //         } else if (e.key.keysym.sym == SDLK_c) {
+    //             *winning_points = 7;
+    //             quit = true;    // Exit after choosing any of the difficulties
+    //         } else if (e.key.keysym.sym == SDLK_d) {
+    //             *winning_points = 10;
+    //             quit = true;    // Exit after choosing any of the difficulties
+    //         } else if (e.key.keysym.sym == SDLK_e) {
+    //             *winning_points = 15;
+    //             quit = true;    // Exit after choosing any of the difficulties
+    //         }
+    //     }
+    // }
+}
 
 void States::ShowWinnerScreen(SDL_Renderer* renderer, TTF_Font* font, int winner) {
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
@@ -66,13 +125,9 @@ void States::ShowWinnerScreen(SDL_Renderer* renderer, TTF_Font* font, int winner
     SDL_DestroyTexture(textTexture);
 
     SDL_RenderPresent(renderer);
-
-    // Wait for a moment to allow the player to see the winner screen
-    // SDL_Delay(3000);  // Adjust the duration as needed
 }
 
 void States::renderText(SDL_Renderer* renderer, TTF_Font* font, std::string text, SDL_Color color, int offset) {
-
     // Render a black background rectangle
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     // SDL_RenderClear(renderer);

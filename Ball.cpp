@@ -40,11 +40,11 @@ void Ball::CollideWithWall(Contact const& contact) {
         position.x = WINDOW_WIDTH / 2.0f;
         position.y = WINDOW_HEIGHT / 2.0f;
         velocity.x = BALL_SPEED;
-        velocity.y = 0.75f * BALL_SPEED;
+        velocity.y = 0;
     } else if (contact.type == CollisionType::Right) {
         position.x = WINDOW_WIDTH / 2.0f;
         position.y = WINDOW_HEIGHT / 2.0f;
         velocity.x = -BALL_SPEED;
-        velocity.y = 0.75f * BALL_SPEED;
+        velocity.y = 0;
     }
 }
