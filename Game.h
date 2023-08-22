@@ -20,6 +20,7 @@ class Game {
 
     // Initialize the font
     TTF_Font* Font ;
+    TTF_Font* FontTitle;
 
     // Initialize sound effects
     Mix_Chunk* wallHitSound ;
@@ -30,6 +31,7 @@ class Game {
 
     SDL_Renderer* getRenderer();
     TTF_Font* getFont();
+    TTF_Font* getFontTitle();
     Mix_Chunk* getWallHitSound();
     Mix_Chunk* getPaddleHitSound() ;
     bool GAME_RUNNING = true;
