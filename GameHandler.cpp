@@ -10,17 +10,18 @@
 void States::initializeStart()
 {
     // Initialize SDL components
-    // Initialize SDL components
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0){
-        printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+    {
+        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
     }
-    if( TTF_Init() == -1 )
-                {
-                    printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
-                }    
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-    printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
-}
+    if (TTF_Init() == -1)
+    {
+        printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+    }
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+    {
+        printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+    }
 }
 
 void States::runStartScreen(SDL_Renderer *renderer, TTF_Font *font, TTF_Font *fontTitle, int w, int h, int *winning_points)
