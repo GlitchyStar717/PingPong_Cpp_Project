@@ -1,15 +1,17 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-#include"Global.h"
-#include<SDL2/SDL.h>
-class Paddle {
-   public:
+#include "Global.h"
+#include <SDL2/SDL.h>
+
+class Paddle
+{
+public:
     Paddle(Vec2 position, Vec2 velocity);
 
-    void Update(float dt) ;
+    void Update(float dt);
 
-    void Draw(SDL_Renderer* renderer);
+    void Draw(SDL_Renderer *renderer);
 
     Vec2 position;
     Vec2 velocity;

@@ -5,7 +5,6 @@
 #include "Ball.h"
 #include "Paddle.h"
 
-
-Contact CheckPaddleCollision(Ball const& ball, Paddle const& paddle) ;
+Contact CheckPaddleCollision(Ball const &ball, Paddle const &paddle);
 
 #endif

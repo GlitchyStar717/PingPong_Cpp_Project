@@ -3,17 +3,18 @@
 #include "Global.h"
 #include <SDL2/SDL.h>
 
-class Ball {
-   public:
+class Ball
+{
+public:
     Ball(Vec2 position, Vec2 velocity);
 
-    void Update(float dt) ;
+    void Update(float dt);
 
-    void Draw(SDL_Renderer* renderer);
+    void Draw(SDL_Renderer *renderer);
 
-    void CollideWithPaddle(Contact const& contact);
+    void CollideWithPaddle(Contact const &contact);
 
-    void CollideWithWall(Contact const& contact);
+    void CollideWithWall(Contact const &contact);
 
     Vec2 position;
     Vec2 velocity;

@@ -2,8 +2,7 @@
 #define CHECK_WALL_COLLISION_H
 
 #include "Global.h"
-#include"Ball.h"
+#include "Ball.h"
 
-
-Contact CheckWallCollision(Ball const& ball) ;
+Contact CheckWallCollision(Ball const &ball);
 #endif

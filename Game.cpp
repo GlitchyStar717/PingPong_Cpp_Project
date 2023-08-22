@@ -5,7 +5,8 @@
 
 #include "GameHandler.h"
 
-Game::Game() {
+Game::Game()
+{
     this->window = NULL;
     this->renderer = NULL;
 
@@ -26,37 +27,46 @@ Game::Game() {
     VictorySound = Mix_LoadWAV("Victory.wav");
 }
 
-SDL_Renderer *Game::getRenderer() {
+SDL_Renderer *Game::getRenderer()
+{
     return this->renderer;
 }
-TTF_Font *Game::getFont() {
+TTF_Font *Game::getFont()
+{
     return this->Font;
 }
 
-TTF_Font *Game::getFontTitle() {
+TTF_Font *Game::getFontTitle()
+{
     return this->FontTitle;
 }
 
-Mix_Chunk *Game::getWallHitSound() {
+Mix_Chunk *Game::getWallHitSound()
+{
     return this->wallHitSound;
 }
-Mix_Chunk *Game::getPaddleHitSound() {
+Mix_Chunk *Game::getPaddleHitSound()
+{
     return this->paddleHitSound;
 }
-Mix_Chunk *Game::getPointSound() {
+Mix_Chunk *Game::getPointSound()
+{
     return this->PointSound;
 }
-Mix_Chunk *Game::getVictorySound() {
+Mix_Chunk *Game::getVictorySound()
+{
     return this->VictorySound;
 }
 
-void Game::GameStart() {
+void Game::GameStart()
+{
     States state1;
     state1.initializeStart();
     int restart = 1;
     int winningPoints;
     // Game logic
-    while (restart == 1) {
+    while (restart == 1)
+    {
         Mix_HaltChannel(-1);
         state1.runStartScreen(getRenderer(), getFont(), getFontTitle(), WINDOW_WIDTH, WINDOW_HEIGHT, &winningPoints);
         restart = 0;
@@ -79,72 +89,103 @@ void Game::GameStart() {
             Vec2(WINDOW_WIDTH - 50.0f, WINDOW_HEIGHT / 2.0f),
             Vec2(0.0f, 0.0f));
 
-        // int playerOneScore = 0;
-        // int playerTwoScore = 0;
-        int nextMatch = 0;  // 0 means no action, -1 means exit, 1 means restart
+        int nextMatch = 0; // 0 means no action, -1 means exit, 1 means restart
 
         bool running = true;
         bool buttons[4] = {};
         bool GAME_FINISHED = false;
 
-        float dt = 0.0f;  // For calculating frameTime for smooth and platform/performance independent speed
-        int winner = 0;   // 0 means no winner yet
+        float dt = 0.0f; // For calculating frameTime for smooth and platform/performance independent speed
+        int winner = 0;  // 0 means no winner yet
 
-        while (running) {
-            if (playerOneScoreText.getScore() > winningPoints) {
-                // running = false;
+        while (running)
+        {
+            if (playerOneScoreText.getScore() > winningPoints)
+            {
                 winner = 1;
                 GAME_FINISHED = true;
             }
-            if (playerTwoScoreText.getScore() > winningPoints) {
-                // running = false;
+            if (playerTwoScoreText.getScore() > winningPoints)
+            {
                 winner = 2;
                 GAME_FINISHED = true;
             }
             auto startTime = std::chrono::high_resolution_clock::now();
 
             SDL_Event event;
-            while (SDL_PollEvent(&event)) {
-                if (event.type == SDL_QUIT) {
+            while (SDL_PollEvent(&event))
+            {
+                if (event.type == SDL_QUIT)
+                {
                     running = false;
-                } else if (event.type == SDL_KEYDOWN) {
-                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                }
+                else if (event.type == SDL_KEYDOWN)
+                {
+                    if (event.key.keysym.sym == SDLK_ESCAPE)
+                    {
                         running = false;
-                    } else if (event.key.keysym.sym == SDLK_w) {
+                    }
+                    else if (event.key.keysym.sym == SDLK_w)
+                    {
                         buttons[Buttons::PaddleOneUp] = true;
-                    } else if (event.key.keysym.sym == SDLK_s) {
+                    }
+                    else if (event.key.keysym.sym == SDLK_s)
+                    {
                         buttons[Buttons::PaddleOneDown] = true;
-                    } else if (event.key.keysym.sym == SDLK_UP) {
+                    }
+                    else if (event.key.keysym.sym == SDLK_UP)
+                    {
                         buttons[Buttons::PaddleTwoUp] = true;
-                    } else if (event.key.keysym.sym == SDLK_DOWN) {
+                    }
+                    else if (event.key.keysym.sym == SDLK_DOWN)
+                    {
                         buttons[Buttons::PaddleTwoDown] = true;
                     }
-                } else if (event.type == SDL_KEYUP) {
-                    if (event.key.keysym.sym == SDLK_w) {
+                }
+                else if (event.type == SDL_KEYUP)
+                {
+                    if (event.key.keysym.sym == SDLK_w)
+                    {
                         buttons[Buttons::PaddleOneUp] = false;
-                    } else if (event.key.keysym.sym == SDLK_s) {
+                    }
+                    else if (event.key.keysym.sym == SDLK_s)
+                    {
                         buttons[Buttons::PaddleOneDown] = false;
-                    } else if (event.key.keysym.sym == SDLK_UP) {
+                    }
+                    else if (event.key.keysym.sym == SDLK_UP)
+                    {
                         buttons[Buttons::PaddleTwoUp] = false;
-                    } else if (event.key.keysym.sym == SDLK_DOWN) {
+                    }
+                    else if (event.key.keysym.sym == SDLK_DOWN)
+                    {
                         buttons[Buttons::PaddleTwoDown] = false;
                     }
                 }
             }
 
-            if (buttons[Buttons::PaddleOneUp]) {
+            if (buttons[Buttons::PaddleOneUp])
+            {
                 paddleOne.velocity.y = -PADDLE_SPEED;
-            } else if (buttons[Buttons::PaddleOneDown]) {
+            }
+            else if (buttons[Buttons::PaddleOneDown])
+            {
                 paddleOne.velocity.y = PADDLE_SPEED;
-            } else {
+            }
+            else
+            {
                 paddleOne.velocity.y = 0.0f;
             }
 
-            if (buttons[Buttons::PaddleTwoUp]) {
+            if (buttons[Buttons::PaddleTwoUp])
+            {
                 paddleTwo.velocity.y = -PADDLE_SPEED;
-            } else if (buttons[Buttons::PaddleTwoDown]) {
+            }
+            else if (buttons[Buttons::PaddleTwoDown])
+            {
                 paddleTwo.velocity.y = PADDLE_SPEED;
-            } else {
+            }
+            else
+            {
                 paddleTwo.velocity.y = 0.0f;
             }
 
@@ -157,30 +198,40 @@ void Game::GameStart() {
 
             // Check collisions
             if (Contact contact = CheckPaddleCollision(ball, paddleOne);
-                contact.type != CollisionType::None) {
+                contact.type != CollisionType::None)
+            {
                 ball.CollideWithPaddle(contact);
 
                 Mix_PlayChannel(-1, getPaddleHitSound(), 0);
-            } else if (contact = CheckPaddleCollision(ball, paddleTwo);
-                       contact.type != CollisionType::None) {
+            }
+            else if (contact = CheckPaddleCollision(ball, paddleTwo);
+                     contact.type != CollisionType::None)
+            {
                 ball.CollideWithPaddle(contact);
 
                 Mix_PlayChannel(-1, getPaddleHitSound(), 0);
-            } else if (contact = CheckWallCollision(ball);
-                       contact.type != CollisionType::None) {
+            }
+            else if (contact = CheckWallCollision(ball);
+                     contact.type != CollisionType::None)
+            {
                 ball.CollideWithWall(contact);
 
-                if (contact.type == CollisionType::Left) {
+                if (contact.type == CollisionType::Left)
+                {
                     Mix_PlayChannel(-1, getPointSound(), 0);
                     ++playerTwoScoreText;
 
                     playerTwoScoreText.SetScore(playerTwoScoreText.getScore());
-                } else if (contact.type == CollisionType::Right) {
+                }
+                else if (contact.type == CollisionType::Right)
+                {
                     Mix_PlayChannel(-1, getPointSound(), 0);
                     ++playerOneScoreText;
 
                     playerOneScoreText.SetScore(playerOneScoreText.getScore());
-                } else {
+                }
+                else
+                {
                     Mix_PlayChannel(-1, getWallHitSound(), 0);
                 }
             }
@@ -188,27 +239,25 @@ void Game::GameStart() {
             // Clear the window to black
             // SDL_SetRenderDrawColor(getRenderer(), 0x0, 0x0, 0x0, 0xFF);
             SDL_SetRenderDrawColor(getRenderer(), 0x2A, 0xBF, 0x6B, 0xAA);
-            // 2ABF6B
             SDL_RenderClear(getRenderer());
 
             // Set the draw color to be white
             SDL_SetRenderDrawColor(getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
 
             // Draw the net
-            for (int y = 0; y < WINDOW_HEIGHT; ++y) {
-                if (y % 10) {
+            for (int y = 0; y < WINDOW_HEIGHT; ++y)
+            {
+                if (y % 10)
+                {
                     SDL_RenderDrawPoint(getRenderer(), WINDOW_WIDTH / 2, y);
                 }
             }
 
             // Draw the ball
-
             SDL_SetRenderDrawColor(getRenderer(), 0xF1, 0xE8, 0x5C, 0xFF);
-            // F1E85C
             ball.Draw(getRenderer());
 
             // Draw the paddles
-            // F93E3D , 6981D9, 0a22fc
             SDL_SetRenderDrawColor(getRenderer(), 0xF9, 0x3E, 0x3D, 0xFF);
             paddleOne.Draw(getRenderer());
             SDL_SetRenderDrawColor(getRenderer(), 0x0A, 0x22, 0xFC, 0xFF);
@@ -226,17 +275,21 @@ void Game::GameStart() {
             auto stopTime = std::chrono::high_resolution_clock::now();
             dt = std::chrono::duration<float, std::chrono::milliseconds::period>(stopTime - startTime).count();
 
-            if (GAME_FINISHED) {
+            if (GAME_FINISHED)
+            {
                 Mix_PlayChannel(-1, getVictorySound(), 0);
                 state1.ShowWinnerScreen(getRenderer(), getFont(), winner);
                 state1.renderText(getRenderer(), getFont(), "Press R for Rematch and Esc to quit", {255, 255, 255}, 0);
                 running = false;
                 nextMatch = 0;
-                while (nextMatch == 0) {  // While event is being collected/ While there is some event. store the event in e.
-                    while (SDL_PollEvent(&event)) {
+                while (nextMatch == 0)
+                { // While event is being collected/ While there is some event. store the event in e.
+                    while (SDL_PollEvent(&event))
+                    {
                         if (event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
                             nextMatch = -1;
-                        else if (event.key.keysym.sym == SDLK_r) {
+                        else if (event.key.keysym.sym == SDLK_r)
+                        {
                             nextMatch = 1;
                             break;
                         }
@@ -244,7 +297,8 @@ void Game::GameStart() {
                 }
                 GAME_RUNNING = false;
             }
-            if (nextMatch == 1) {
+            if (nextMatch == 1)
+            {
                 // Restart the game
                 state1.ResetGame(ball, paddleOne, paddleTwo, playerOneScoreText, playerTwoScoreText);
                 GAME_FINISHED = false;
@@ -254,7 +308,8 @@ void Game::GameStart() {
         }
     }
 }
-void Game::Close() {
+void Game::Close()
+{
     Mix_FreeChunk(wallHitSound);
     Mix_FreeChunk(paddleHitSound);
     SDL_DestroyRenderer(renderer);

@@ -1,7 +1,7 @@
 #include "CheckPaddleCollision.h"
 
-
-Contact CheckPaddleCollision(Ball const& ball, Paddle const& paddle) {
+Contact CheckPaddleCollision(Ball const &ball, Paddle const &paddle)
+{
     float ballLeft = ball.position.x;
     float ballRight = ball.position.x + BALL_WIDTH;
     float ballTop = ball.position.y;
@@ -14,38 +14,50 @@ Contact CheckPaddleCollision(Ball const& ball, Paddle const& paddle) {
 
     Contact contact{};
 
-    if (ballLeft >= paddleRight) {
+    if (ballLeft >= paddleRight)
+    {
         return contact;
     }
 
-    if (ballRight <= paddleLeft) {
+    if (ballRight <= paddleLeft)
+    {
         return contact;
     }
 
-    if (ballTop >= paddleBottom) {
+    if (ballTop >= paddleBottom)
+    {
         return contact;
     }
 
-    if (ballBottom <= paddleTop) {
+    if (ballBottom <= paddleTop)
+    {
         return contact;
     }
 
     float paddleRangeUpper = paddleBottom - (2.0f * PADDLE_HEIGHT / 3.0f);
     float paddleRangeMiddle = paddleBottom - (PADDLE_HEIGHT / 3.0f);
 
-    if (ball.velocity.x < 0) {
+    if (ball.velocity.x < 0)
+    {
         // Left paddle
         contact.penetration = paddleRight - ballLeft;
-    } else if (ball.velocity.x > 0) {
+    }
+    else if (ball.velocity.x > 0)
+    {
         // Right paddle
         contact.penetration = paddleLeft - ballRight;
     }
 
-    if ((ballBottom > paddleTop) && (ballBottom < paddleRangeUpper)) {
+    if ((ballBottom > paddleTop) && (ballBottom < paddleRangeUpper))
+    {
         contact.type = CollisionType::Top;
-    } else if ((ballBottom > paddleRangeUpper) && (ballBottom < paddleRangeMiddle)) {
+    }
+    else if ((ballBottom > paddleRangeUpper) && (ballBottom < paddleRangeMiddle))
+    {
         contact.type = CollisionType::Middle;
-    } else {
+    }
+    else
+    {
         contact.type = CollisionType::Bottom;
     }
 
