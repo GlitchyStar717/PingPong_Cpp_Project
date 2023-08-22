@@ -81,7 +81,7 @@ void States::runStartScreen(SDL_Renderer *renderer, TTF_Font *font, TTF_Font *fo
 
 void States::ShowWinnerScreen(SDL_Renderer *renderer, TTF_Font *font, int winner)
 {
-    SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
+    SDL_Color textColor = {0x00, 0xFF, 0x00, 0xFF};
     std::string winnerText = "Player " + std::to_string(winner) + " wins!";
 
     // Render a black background rectangle
