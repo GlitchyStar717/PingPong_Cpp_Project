@@ -1,7 +1,7 @@
 #ifndef GAME_HANDLER_H
 #define GAME_HANDLER_H
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <string>
 
 #include "Ball.h"

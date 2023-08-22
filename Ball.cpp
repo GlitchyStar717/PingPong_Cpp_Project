@@ -1,5 +1,5 @@
 #include "Ball.h"
-#include "SDL2/SDL.h"
+#include "SDL.h"
 
 Ball::Ball(Vec2 position, Vec2 velocity)
     : position(position), velocity(velocity)

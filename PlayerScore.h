@@ -1,8 +1,8 @@
 #ifndef PLAYER_SCORE_H
 #define PLAYER_SCORE_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
 
 #include "Global.h"
 
