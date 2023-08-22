@@ -24,8 +24,9 @@ class Game {
 
     // Initialize sound effects
     Mix_Chunk* wallHitSound ;
-    Mix_Chunk* paddleHitSound ;
     Mix_Chunk* PointSound ;
+    Mix_Chunk* paddleHitSound ;
+    Mix_Chunk* VictorySound ;
 
    public:
     Game();
@@ -35,6 +36,7 @@ class Game {
     TTF_Font* getFontTitle();
     Mix_Chunk* getWallHitSound();
     Mix_Chunk* getPaddleHitSound() ;
+    Mix_Chunk* getVictorySound() ;
     Mix_Chunk* getPointSound() ;
     bool GAME_RUNNING = true;
 
