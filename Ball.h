@@ -16,8 +16,12 @@ public:
 
     void CollideWithWall(Contact const &contact);
 
+    float generate_random_y_speed();
+
+
     Vec2 position;
     Vec2 velocity;
     SDL_Rect rect{};
 };
 #endif
+

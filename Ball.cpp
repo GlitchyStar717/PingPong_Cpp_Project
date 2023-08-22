@@ -1,5 +1,7 @@
 #include "Ball.h"
 #include "SDL.h"
+#include <random>
+
 
 Ball::Ball(Vec2 position, Vec2 velocity)
     : position(position), velocity(velocity)
@@ -50,13 +52,24 @@ void Ball::CollideWithWall(Contact const &contact)
         position.x = WINDOW_WIDTH / 2.0f;
         position.y = WINDOW_HEIGHT / 2.0f;
         velocity.x = BALL_SPEED;
-        velocity.y = 0;
+        velocity.y = generate_random_y_speed();
     }
     else if (contact.type == CollisionType::Right)
     {
         position.x = WINDOW_WIDTH / 2.0f;
         position.y = WINDOW_HEIGHT / 2.0f;
         velocity.x = -BALL_SPEED;
-        velocity.y = 0;
+        velocity.y = generate_random_y_speed();
     }
+}
+
+float Ball::generate_random_y_speed(){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    
+    // Define a distribution for floating-point numbers between -0.8 and 0.8
+    std::uniform_real_distribution<float> dist(-0.8f, 0.8f);
+    
+    // Return a random float between -0.8 and 0.8
+    return dist(gen);
 }
