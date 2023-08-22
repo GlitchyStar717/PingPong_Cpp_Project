@@ -222,7 +222,7 @@ void Game::GameStart() {
             dt = std::chrono::duration<float, std::chrono::milliseconds::period>(stopTime - startTime).count();
 
             if (GAME_FINISHED) {
-                state1.ShowWinnerScreen(getRenderer(), getFont(), winner);
+                state1.ShowWinnerScreen(getRenderer(), getFontTitle(), winner);
                 state1.renderText(getRenderer(), getFont(), "Press R for Rematch and Esc to quit", {255, 255, 255}, 0);
                 running = false;
                 nextMatch = 0;
