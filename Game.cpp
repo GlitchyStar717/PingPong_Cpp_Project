@@ -38,8 +38,6 @@ TTF_Font *Game::getFontTitle()
     return this->FontTitle;
 }
 
-
-
 Mix_Chunk *Game::getWallHitSound()
 {
     return this->wallHitSound;
@@ -55,10 +53,10 @@ void Game::GameStart()
     state1.initializeStart();
     int restart = 1;
     int winningPoints;
-    state1.runStartScreen(getRenderer(), getFont(), getFontTitle(), WINDOW_WIDTH, WINDOW_HEIGHT, &winningPoints);
     // Game logic
     while (restart == 1)
     {
+        state1.runStartScreen(getRenderer(), getFont(), getFontTitle(), WINDOW_WIDTH, WINDOW_HEIGHT, &winningPoints);
         restart = 0;
         // Create the player score text fields
         PlayerScore playerOneScoreText(Vec2(WINDOW_WIDTH / 4, 20), getRenderer(), getFont());
