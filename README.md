@@ -9,7 +9,7 @@ Run the a.exe file directly for running the game
 ### Option 2:
 Run the runcode.bat file and wait for the compilation of the new executable. The runcode.bat will automatically run the new executable file.
 
-### Option 3.
+### Option 3:
 In a powershell, go to this directory, then run the following command : 
 "g++ main.cpp Game.cpp GameHandler.cpp PlayerScore.cpp Paddle.cpp CheckWallCollision.cpp CheckPaddleCollision.cpp Ball.cpp -I src/include -L src/lib -o a -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_mixer"
 Then Run the executable by running the command :
