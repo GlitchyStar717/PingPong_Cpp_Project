@@ -42,6 +42,7 @@ void States::runStartScreen(SDL_Renderer *renderer, TTF_Font *font, TTF_Font *fo
         renderText(renderer, font, "4) 10", {255, 255, 255}, 300);
         renderText(renderer, font, "5) 15", {255, 255, 255}, 450);
         renderText(renderer, font, "6) 20", {255, 255, 255}, 600);
+        renderText(renderer, font, "Controls: W|S AND UpArrow|DownArrow", {255, 255, 255}, 800);
 
         SDL_RenderPresent(renderer);
     }
