@@ -21,10 +21,10 @@ Game::Game()
     FontTitle = TTF_OpenFont("Retro_Gaming.ttf", 80);
 
     // Initialize sound effects
-    wallHitSound = Mix_LoadWAV("WallHit.wav");
-    paddleHitSound = Mix_LoadWAV("PaddleHit.wav");
-    PointSound = Mix_LoadWAV("Point.wav");
-    VictorySound = Mix_LoadWAV("Victory.wav");
+    wallHitSound = Mix_LoadWAV("./audio/WallHit.wav");
+    paddleHitSound = Mix_LoadWAV("./audio/PaddleHit.wav");
+    PointSound = Mix_LoadWAV("./audio/Point.wav");
+    VictorySound = Mix_LoadWAV("./audio/Victory.wav");
 }
 
 SDL_Renderer *Game::getRenderer()
