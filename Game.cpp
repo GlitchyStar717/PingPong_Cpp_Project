@@ -23,6 +23,7 @@ Game::Game() {
     wallHitSound = Mix_LoadWAV("WallHit.wav");
     paddleHitSound = Mix_LoadWAV("PaddleHit.wav");
     PointSound = Mix_LoadWAV("Point.wav");
+    VictorySound = Mix_LoadWAV("Victory.wav");
 }
 
 SDL_Renderer *Game::getRenderer() {
@@ -45,6 +46,9 @@ Mix_Chunk *Game::getPaddleHitSound() {
 Mix_Chunk *Game::getPointSound() {
     return this->PointSound;
 }
+Mix_Chunk *Game::getVictorySound() {
+    return this->VictorySound;
+}
 
 void Game::GameStart() {
     States state1;
@@ -53,6 +57,7 @@ void Game::GameStart() {
     int winningPoints;
     // Game logic
     while (restart == 1) {
+        Mix_HaltChannel(-1);
         state1.runStartScreen(getRenderer(), getFont(), getFontTitle(), WINDOW_WIDTH, WINDOW_HEIGHT, &winningPoints);
         restart = 0;
         // Create the player score text fields
@@ -222,6 +227,7 @@ void Game::GameStart() {
             dt = std::chrono::duration<float, std::chrono::milliseconds::period>(stopTime - startTime).count();
 
             if (GAME_FINISHED) {
+                Mix_PlayChannel(-1, getVictorySound(), 0);
                 state1.ShowWinnerScreen(getRenderer(), getFont(), winner);
                 state1.renderText(getRenderer(), getFont(), "Press R for Rematch and Esc to quit", {255, 255, 255}, 0);
                 running = false;
