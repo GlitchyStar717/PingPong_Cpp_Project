@@ -31,20 +31,27 @@ void States::runStartScreen(SDL_Renderer *renderer, TTF_Font *font, TTF_Font *fo
     *winning_points = 5; // By default the winning point is 5;
 
     {
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
 
-        renderText(renderer, fontTitle, "PingPong", {0, 255, 0}, -500);
-        renderText(renderer, font, "Choose the Points to Win ? ", {255, 255, 255}, -300);
-        renderText(renderer, font, "1) 3", {255, 255, 255}, -150);
-        renderText(renderer, font, "2) 5", {255, 255, 255}, 0);
-        renderText(renderer, font, "3) 7", {255, 255, 255}, 150);
-        renderText(renderer, font, "4) 10", {255, 255, 255}, 300);
-        renderText(renderer, font, "5) 15", {255, 255, 255}, 450);
-        renderText(renderer, font, "6) 20", {255, 255, 255}, 600);
+    renderText(renderer, fontTitle, "PingPong", {0, 255, 0}, -800);
+    renderText(renderer, font, "Choose the Points to Win ?", {255, 255, 255}, -600);
+    renderText(renderer, font, "1) 3", {255, 255, 255}, -450);
+    renderText(renderer, font, "2) 5", {255, 255, 255}, -300);
+    renderText(renderer, font, "3) 7", {255, 255, 255}, -150);
+    renderText(renderer, font, "4) 10", {255, 255, 255}, 0);
+    renderText(renderer, font, "5) 15", {255, 255, 255}, 150);
+    renderText(renderer, font, "6) 20", {255, 255, 255}, 300);
 
-        SDL_RenderPresent(renderer);
-    }
+    renderText(renderer, font, "_____________________________________________",  {255, 255, 255}, 400, 0, (WINDOW_HEIGHT/3));
+    renderText(renderer, font, "|                                CONTROLS                        |", {255, 255, 255}, 450, 0, (WINDOW_HEIGHT/3));
+    renderText(renderer, font, "|                          Player 1                  Player 2|", {255, 255, 255}, 550, 0, (WINDOW_HEIGHT/3));
+    renderText(renderer, font, "|Paddle Up:           W                    UpArrowKey|", {255, 255, 255}, 650, 0, (WINDOW_HEIGHT/3));
+    renderText(renderer, font, "|Paddle Down:       S                DownArrowKey|", {255, 255, 255}, 750, 0, (WINDOW_HEIGHT/3));
+    renderText(renderer, font, "_____________________________________________", {255, 255, 255}, 780, 0, (WINDOW_HEIGHT/3));
+
+    SDL_RenderPresent(renderer);
+}
 
     while (!quit)
     {
@@ -114,20 +121,19 @@ void States::ShowWinnerScreen(SDL_Renderer *renderer, TTF_Font *font, int winner
     SDL_RenderPresent(renderer);
 }
 
-void States::renderText(SDL_Renderer *renderer, TTF_Font *font, std::string text, SDL_Color color, int offset)
+void States::renderText(SDL_Renderer *renderer, TTF_Font *font, std::string text, SDL_Color color, int y_offset, int x_offset, int x_align, int y_align)
 {
     // Render a black background rectangle
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     // SDL_RenderClear(renderer);
 
-    // Render the rematch option text on the black background
     SDL_Surface *textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
     SDL_Texture *textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 
     int textWidth, textHeight;
     SDL_QueryTexture(textTexture, nullptr, nullptr, &textWidth, &textHeight);
 
-    SDL_Rect textRect = {(WINDOW_WIDTH - textWidth) / 2, (WINDOW_HEIGHT - textHeight + offset) / 2, textWidth, textHeight};
+    SDL_Rect textRect = {x_align + ((x_offset*(WINDOW_WIDTH - textWidth)) / 2), y_align + ((WINDOW_HEIGHT - textHeight + y_offset) / 2), textWidth, textHeight};
 
     SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 
