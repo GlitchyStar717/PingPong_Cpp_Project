@@ -67,9 +67,9 @@ float Ball::generate_random_y_speed(){
     std::random_device rd;
     std::mt19937 gen(rd());
     
-    // Define a distribution for floating-point numbers between -0.8 and 0.8
-    std::uniform_real_distribution<float> dist(-0.8f, 0.8f);
+    // Define a distribution for floating-point numbers between -0.6 and 0.6
+    std::uniform_real_distribution<float> dist(-0.6f, 0.6f);
     
-    // Return a random float between -0.8 and 0.8
+    // Return a random float between -0.6 and 0.6
     return dist(gen);
 }
