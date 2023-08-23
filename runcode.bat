@@ -1,2 +1,2 @@
-mingw64/bin/g++ main.cpp Game.cpp GameHandler.cpp PlayerScore.cpp Paddle.cpp CheckWallCollision.cpp CheckPaddleCollision.cpp Ball.cpp -I src/include -L src/lib -o Pong -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_mixer -static-libgcc -static-libstdc++
+g++ main.cpp Game.cpp GameHandler.cpp PlayerScore.cpp Paddle.cpp CheckWallCollision.cpp CheckPaddleCollision.cpp Ball.cpp -I src/include -L src/lib -o Pong -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_mixer -static-libgcc -static-libstdc++
 .\Pong

@@ -1,11 +1,13 @@
 #include "Ball.h"
 #include "SDL.h"
 #include <random>
+#include<iostream>
 
 
 Ball::Ball(Vec2 position, Vec2 velocity)
     : position(position), velocity(velocity)
 {
+    start = std::chrono::system_clock::now();
     rect.x = static_cast<int>(position.x);
     rect.y = static_cast<int>(position.y);
     rect.w = BALL_WIDTH;
@@ -14,7 +16,22 @@ Ball::Ball(Vec2 position, Vec2 velocity)
 
 void Ball::Update(float dt)
 {
-    position += velocity * dt;
+     
+    present = std::chrono::system_clock::now();
+ 
+    std::chrono::duration<double> elapsed_seconds = present - start;
+
+    duration = elapsed_seconds.count();
+    
+    std::cout << duration<<std:: endl;
+
+    if(duration < 1.0f){
+    position += velocity * dt * ((duration+1)/2.5);
+    }
+    else{
+    position += velocity * dt ;
+    }
+
 }
 
 void Ball::Draw(SDL_Renderer *renderer)
@@ -53,6 +70,8 @@ void Ball::CollideWithWall(Contact const &contact)
         position.y = WINDOW_HEIGHT / 2.0f;
         velocity.x = BALL_SPEED;
         velocity.y = generate_random_y_speed();
+        start = std::chrono::system_clock::now();
+
     }
     else if (contact.type == CollisionType::Right)
     {
@@ -60,6 +79,8 @@ void Ball::CollideWithWall(Contact const &contact)
         position.y = WINDOW_HEIGHT / 2.0f;
         velocity.x = -BALL_SPEED;
         velocity.y = generate_random_y_speed();
+        start = std::chrono::system_clock::now();
+
     }
 }
 
