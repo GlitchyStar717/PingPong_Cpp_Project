@@ -41,6 +41,7 @@ public:
     Mix_Chunk *getPointSound();
     bool GAME_RUNNING = true;
 
+
     void GameStart();
     void Close();
 };

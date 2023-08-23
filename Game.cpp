@@ -5,6 +5,8 @@
 
 #include "GameHandler.h"
 
+
+
 Game::Game()
 {
     this->window = NULL;
@@ -270,6 +272,8 @@ void Game::GameStart()
 
             // Present the backbuffer
             SDL_RenderPresent(getRenderer());
+
+            ball.delay_after_point();
 
             // Calculate frame time
             auto stopTime = std::chrono::high_resolution_clock::now();
