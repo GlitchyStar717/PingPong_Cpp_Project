@@ -39,7 +39,6 @@ void PlayerScore::SetScore(int score)
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
     rect.w = width;
     rect.h = height;
-    
 }
 void PlayerScore::showWinScore(int score)
 {

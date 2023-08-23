@@ -5,8 +5,6 @@
 
 class Ball
 {
-    private:
-        bool collided_with_wall;
 public:
     Ball(Vec2 position, Vec2 velocity);
 
@@ -20,12 +18,10 @@ public:
 
     float generate_random_y_speed();
 
-    void delay_after_point();
 
     Vec2 position;
     Vec2 velocity;
     SDL_Rect rect{};
 };
-
 #endif
 
