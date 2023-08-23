@@ -11,7 +11,7 @@ Run the runcode.bat file and wait for the compilation of the new executable. Mig
 
 ### Option 3:
 In a powershell, go to this directory, then run the following command : 
-"mingw64/bin/g++ main.cpp Game.cpp GameHandler.cpp PlayerScore.cpp Paddle.cpp CheckWallCollision.cpp CheckPaddleCollision.cpp Ball.cpp -I src/include -L src/lib -o Pong -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_mixer"
+"mingw64/bin/g++ main.cpp Game.cpp GameHandler.cpp PlayerScore.cpp Paddle.cpp CheckWallCollision.cpp CheckPaddleCollision.cpp Ball.cpp -I src/include -L src/lib -o Pong -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_mixer -static-libgcc -static-libstdc++"
 Then Run the executable by running the command :
 ".\Pong"
 
