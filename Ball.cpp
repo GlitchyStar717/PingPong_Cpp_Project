@@ -23,7 +23,6 @@ void Ball::Update(float dt)
 
     duration = elapsed_seconds.count();
     
-    std::cout << duration<<std:: endl;
 
     if(duration < 1.0f){
     position += velocity * dt * ((duration+1)/2.5);
