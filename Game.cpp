@@ -1,7 +1,7 @@
 #include "Game.h"
 
 #include <chrono>
-#include <string>
+#include<iostream>
 
 #include "GameHandler.h"
 
@@ -12,11 +12,17 @@ Game::Game()
     this->window = NULL;
     this->renderer = NULL;
 
-    States state1;
     state1.initializeStart();
+
 
     window = SDL_CreateWindow("Pong", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, 0);
+
+    
+    if (window == NULL){
+        std::cout<<"Game could not be loaded. "<<std::endl;
+        GAME_RUNNING = false;
+    }
 
     // Initialize the font
     Font = TTF_OpenFont("Retro_Gaming.ttf", 33);
@@ -62,8 +68,6 @@ Mix_Chunk *Game::getVictorySound()
 
 void Game::GameStart()
 {
-    States state1;
-    state1.initializeStart();
     int restart = 1;
     int winningPoints;
     // Game logic
@@ -249,14 +253,15 @@ void Game::GameStart()
             // Draw the net
             for (int y = 0; y < WINDOW_HEIGHT; ++y)
             {
-                if (y % 10)
+                if (y % 30)
                 {
                     SDL_RenderDrawPoint(getRenderer(), WINDOW_WIDTH / 2, y);
                 }
             }
 
             // Draw the ball
-            SDL_SetRenderDrawColor(getRenderer(), 0xF1, 0xE8, 0x5C, 0xFF);
+            SDL_SetRenderDrawColor(getRenderer(), 0xFF, 0x0, 0xFF, 0xFF);
+            // SDL_SetRenderDrawColor(getRenderer(), 0xF1, 0xE8, 0x5C, 0xFF);
             ball.Draw(getRenderer());
 
             // Draw the paddles

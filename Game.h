@@ -28,6 +28,7 @@ private:
     Mix_Chunk *PointSound;
     Mix_Chunk *paddleHitSound;
     Mix_Chunk *VictorySound;
+    States state1;
 
 public:
     Game();

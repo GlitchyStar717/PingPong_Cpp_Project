@@ -49,7 +49,7 @@ void Ball::CollideWithPaddle(Contact const &contact)
 
     if (contact.type == CollisionType::Top)
     {
-        velocity.y = -.75f * BALL_SPEED;
+        velocity.y = -0.75f * BALL_SPEED;
     }
     else if (contact.type == CollisionType::Bottom)
     {

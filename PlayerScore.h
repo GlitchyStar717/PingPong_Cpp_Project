@@ -14,7 +14,7 @@ public:
     PlayerScore(Vec2 position, SDL_Renderer *renderer, TTF_Font *font);
     ~PlayerScore();
     void SetScore(int score);
-    void showWinScore(int score);
+    // void showWinScore(int score);
     int getScore();
 
     void Draw();
